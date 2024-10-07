@@ -1,4 +1,4 @@
-package Documentacion;
+package metodos;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -20,11 +20,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
-@autor: Jorge David Torrico Copali
-@codigo sis: 202200286
-*/
+ * @autor: Jorge David Torrico Copali
+ * @codigo sis: 202200286
+ *         Clase que maneja la interfaz gráfica de usuario para la gestión de
+ *         tareas.
+ *         Proporciona funcionalidad para iniciar sesión, registrar usuarios, y
+ *         gestionar tareas
+ *         (agregar, modificar, eliminar, completar, e imprimir la lista de
+ *         tareas).
+ */
 
 public class InterfazGrafica {
+
     private JFrame ventanaPrincipal;
     private JList<Tarea> listaTareas;
     private DefaultListModel<Tarea> modeloTareas;
@@ -32,11 +39,16 @@ public class InterfazGrafica {
     private JTextField campoUsuario;
     private JTextField campoContraseña;
 
-    private int anchoCampoLogin = 10;
-    private int anchoCampoTarea = 10;
+    private int anchoCampoLogin = 9;
+    private int anchoCampoTarea = 9;
+
+    /**
+     * Constructor de la clase InterfazGrafica. Inicializa la ventana principal con
+     * un formulario de inicio de sesión y los componentes necesarios.
+     */
 
     public InterfazGrafica() {
-        ventanaPrincipal = new JFrame("LISTA DE TAREAS");
+        ventanaPrincipal = new JFrame("Lista De Tareas");
         ventanaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventanaPrincipal.setSize(400, 100);
         ventanaPrincipal.setLocationRelativeTo(null);
@@ -44,19 +56,19 @@ public class InterfazGrafica {
 
         modeloTareas = new DefaultListModel<>();
         listaTareas = new JList<>(modeloTareas);
-        listaTareas.setBackground(new Color(255, 255, 255));
-        listaTareas.setForeground(new Color(0, 0, 0));
+        listaTareas.setBackground(new Color(255, 211, 151));
+        listaTareas.setForeground(new Color(80, 80, 80));
 
         JPanel panelLogin = new JPanel();
-        panelLogin.setBackground(new Color(220, 220, 220));
+        panelLogin.setBackground(new Color(255, 150, 80));
         campoUsuario = new JTextField(anchoCampoLogin);
         campoContraseña = new JTextField(anchoCampoLogin);
         JButton btnIniciarSesion = new JButton("Iniciar Sesión");
         JButton btnRegistrar = new JButton("Registrar");
 
-        btnIniciarSesion.setBackground(new Color(60, 120, 240));
+        btnIniciarSesion.setBackground(new Color(102, 200, 100));
         btnIniciarSesion.setForeground(Color.WHITE);
-        btnRegistrar.setBackground(new Color(60, 120, 240));
+        btnRegistrar.setBackground(new Color(90, 160, 255));
         btnRegistrar.setForeground(Color.WHITE);
 
         panelLogin.add(new JLabel("Usuario:"));
@@ -73,6 +85,11 @@ public class InterfazGrafica {
         ventanaPrincipal.setVisible(true);
     }
 
+    /**
+     * Método que gestiona el inicio de sesión del usuario. Verifica las
+     * credenciales
+     * ingresadas y, si son válidas, carga la lista de tareas del usuario.
+     */
     private void iniciarSesion() {
         String usuario = campoUsuario.getText();
         String contraseña = campoContraseña.getText();
@@ -88,6 +105,12 @@ public class InterfazGrafica {
         JOptionPane.showMessageDialog(ventanaPrincipal, "Usuario o contraseña incorrectos.");
     }
 
+    /**
+     * Registra un nuevo usuario con el nombre de usuario y contraseña ingresados.
+     * Si el registro es exitoso, se muestra la lista de tareas vacía para el nuevo
+     * usuario.
+     */
+
     private void registrarUsuario() {
         String usuario = campoUsuario.getText();
         String contraseña = campoContraseña.getText();
@@ -102,6 +125,11 @@ public class InterfazGrafica {
         }
     }
 
+    /**
+     * Muestra la interfaz de la lista de tareas, donde el usuario puede gestionar
+     * sus tareas (añadir, modificar, eliminar, completar e imprimir).
+     */
+
     private void mostrarListaDeTareas() {
         ventanaPrincipal.getContentPane().removeAll();
         ventanaPrincipal.setSize(650, 450);
@@ -112,17 +140,17 @@ public class InterfazGrafica {
         JButton btnModificar = new JButton("MODIFICAR TAREA");
         JButton btnImprimir = new JButton("IMPRIMIR LISTA");
 
-        btnAñadir.setBackground(new Color(60, 120, 240));
+        btnAñadir.setBackground(new Color(110, 220, 80));
         btnAñadir.setForeground(Color.WHITE);
-        btnCompletar.setBackground(new Color(60, 120, 240));
+        btnCompletar.setBackground(new Color(110, 220, 80));
         btnCompletar.setForeground(Color.WHITE);
-        btnEliminar.setBackground(new Color(60, 120, 240));
+        btnEliminar.setBackground(new Color(240, 200, 140));
         btnEliminar.setForeground(Color.WHITE);
-        btnModificar.setBackground(new Color(60, 120, 240));
+        btnModificar.setBackground(new Color(240, 200, 140));
         btnModificar.setForeground(Color.WHITE);
-        btnImprimir.setBackground(new Color(60, 120, 240));
+        btnImprimir.setBackground(new Color(240, 200, 140));
         btnImprimir.setForeground(Color.WHITE);
-        btnFinalizar.setBackground(new Color(240, 60, 60));
+        btnFinalizar.setBackground(new Color(255, 83, 84));
         btnFinalizar.setForeground(Color.WHITE);
 
         btnAñadir.addActionListener(e -> añadirTarea());
@@ -138,7 +166,7 @@ public class InterfazGrafica {
         }
 
         JPanel panelSuperior = new JPanel();
-        panelSuperior.setBackground(new Color(220, 220, 220));
+        panelSuperior.setBackground(new Color(255, 167, 53));
         panelSuperior.add(btnAñadir);
         panelSuperior.add(btnFinalizar);
 
@@ -146,7 +174,7 @@ public class InterfazGrafica {
         panelCentral.add(new JScrollPane(listaTareas), BorderLayout.CENTER);
 
         JPanel panelInferior = new JPanel();
-        panelInferior.setBackground(new Color(220, 220, 220));
+        panelInferior.setBackground(new Color(255, 167, 53));
         panelInferior.add(btnCompletar);
         panelInferior.add(btnEliminar);
         panelInferior.add(btnModificar);
@@ -160,9 +188,13 @@ public class InterfazGrafica {
         ventanaPrincipal.repaint();
     }
 
+    /**
+     * Añade una nueva tarea a la lista. Muestra un formulario para ingresar los
+     * detalles de la tarea, como el nombre, fecha límite y prioridad.
+     */
     private void añadirTarea() {
-        JTextField campoNombre = new JTextField(10);
-        JTextField campoFecha = new JTextField(10);
+        JTextField campoNombre = new JTextField(6);
+        JTextField campoFecha = new JTextField(6);
         String[] prioridades = { "ALTA", "MEDIA", "BAJA" };
         JComboBox<String> comboPrioridad = new JComboBox<>(prioridades);
 
@@ -190,6 +222,9 @@ public class InterfazGrafica {
         }
     }
 
+    /**
+     * Marca la tarea seleccionada como completada y actualiza la lista de tareas.
+     */
     private void completarTarea() {
         Tarea tareaSeleccionada = listaTareas.getSelectedValue();
         if (tareaSeleccionada != null) {
@@ -202,6 +237,9 @@ public class InterfazGrafica {
         }
     }
 
+    /**
+     * Elimina la tarea seleccionada de la lista de tareas.
+     */
     private void eliminarTarea() {
         Tarea tareaSeleccionada = listaTareas.getSelectedValue();
         if (tareaSeleccionada != null) {
@@ -211,6 +249,12 @@ public class InterfazGrafica {
             JOptionPane.showMessageDialog(ventanaPrincipal, "POR FAVOR SELECCIONE UNA TAREA PARA ELIMINAR");
         }
     }
+
+    /**
+     * Modifica los detalles de la tarea seleccionada. Muestra un formulario para
+     * cambiar
+     * el nombre, fecha límite y prioridad de la tarea.
+     */
 
     private void modificarTarea() {
         Tarea tareaSeleccionada = listaTareas.getSelectedValue();
@@ -252,6 +296,9 @@ public class InterfazGrafica {
         }
     }
 
+    /**
+     * Imprime la lista de tareas en un archivo de texto "lista_de_tareas.txt".
+     */
     private void imprimirLista() {
         String destinoTXT = "LISTA DE TAREAS.txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(destinoTXT))) {
@@ -267,6 +314,9 @@ public class InterfazGrafica {
         }
     }
 
+    /**
+     * Cierra la aplicación y guarda las tareas del usuario.
+     */
     private void finalizarPrograma() {
         ventanaPrincipal.dispose();
         System.exit(0);
