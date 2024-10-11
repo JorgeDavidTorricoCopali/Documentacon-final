@@ -1,4 +1,4 @@
-package Documentacion;
+package metodos;
 /**
 @autor: Jorge David Torrico Copali
 @codigo sis: 202200286
